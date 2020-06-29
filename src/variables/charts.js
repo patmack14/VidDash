@@ -16,7 +16,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-
+//import data from './tester.js';
 const dashboard24HoursPerformanceChart = {
   data: (canvas) => {
     return {
@@ -167,99 +167,17 @@ const dashboardEmailStatisticsChart = {
   },
 };
 
-//const theFile = './converjson.json' ;
-/*
-
-
-
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = evt => {
-      const bstr = evt.target.result;
-      const wb = XLSX.read(bstr, { type: "binary" });
-      const wsname = wb.SheetNames[0];
-      const ws = wb.Sheets[wsname];
-      const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      resolve(data);
-      console.log(data);
-    };
-    reader.onerror = err => {
-      reject(err);
-      reader.abort();
-    };
-    reader.readAsBinaryString(Faucett);
-  });
-
-export default () => {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-
-  const handleFiles = async files => {
-    try {
-      const d = await readJsonFromExcel(files[0]);
-      setData(d);
-    } catch (err) {
-      setError(err);
-    }
-  };
-
-  if (error) {
-    return <div>{error.message}</div>;
-  }
-  
- const fs = require('fs');
- var data= [];
- data.push(`"Scott Faucett, MD",https://vidscrip-static-content-api-vidscrip-com.s3-us-west-2.amazonaws.com/avatars/250X250/58n3cAGWDzQbNDmbAMWc25lTIbiM9MPy8jn82g9W.jpg,Off The Shelf vs Customized Knee Replacement,Why do you choose customized knee replacements for your patients?,5aa05af69fb3a50007478e7c,Wed Apr 18 2018 15:22:59 GMT-0500 (Central Daylight Time),video_progress,5aa05af69fb3a50007478e7c,0,0,0,0,0"`)
- //console.log(`${data} Hello World`)
- Papa.parse(data,{
-   header:true,
-   complete:function(results){
-     console.log("Row:", results.data);
-     
-   },
-    error:function(error){
-      console.log(error)
-    }
- });
- */
-/*
-const fs = require('fs');
-
-const papa= require('papaparse');
-const file = fs.createReadStream('temp.json');
-var count = 0; // cache the running count
-papa.parse(file, {
-    worker: true, // Don't bog down the main thread if its a big file
-    step: function(result) {
-        // do stuff with result
-    },
-    complete: function(results, file) {
-        console.log('parsing complete read', count, 'records.'); 
-    }
-});
-*/
-const Papa = require('papaparse');
-var file = new File(["temp"], "temp.json", {
-  type: "application/json",
-});
-Papa.parse(File, {
-	complete: function(results) {
-		console.log("Finished:", results.data.toString());
-	}
-});
-
 const dashboardNASDAQChart = {
  
   data: {
     labels: [
-      
-    "Januaray",
-    "Feburaray",
+      "Januray "
+
       
     ],
     datasets: [
       {
-        data: [],
+        data: [5,10],
         fill: false,
         borderColor: "#fbc658",
         backgroundColor: "transparent",

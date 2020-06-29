@@ -16,7 +16,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+//import firstChart from "./chartlogic";
 import React from "react";
+
 // react plugin used to create charts
 import { Line, Pie } from "react-chartjs-2";
 // reactstrap components
@@ -35,9 +37,34 @@ import {
   dashboardEmailStatisticsChart,
   dashboardNASDAQChart,
 } from "variables/charts.js";
+import data from './tester.js';
+var moment = require('moment');
+//console.log(data)
 
 class Dashboard extends React.Component {
   render() {
+    let array= [];
+var eventDate;
+function dataGet(data){
+  for(let i =0;i<data.length;i++){
+    if(data[i].hrsWatched>0){
+      data[i].EventDate=moment().format('MMM Do YYYY, h:mm')
+     // eventDate = data.map(function(d){return d.EventDate});
+      array[i]=data[i];
+     }
+}}
+dataGet(data);
+ console.log(array);
+var hrsWatch=0;
+for(let i = 0;i<data.length;i++){
+if(data[i].hrsWatched>0)
+  hrsWatch+=data[i].hrsWatched;
+  console.log("hrs Watched: "+ hrsWatch);
+}
+console.log("HOURS WATCHED!!! " + hrsWatch)
+
+
+    //firstChart();
     return (
       <>
         <div className="content">
@@ -53,8 +80,8 @@ class Dashboard extends React.Component {
                     </Col>
                     <Col md="8" xs="7">
                       <div className="numbers">
-                        <p className="card-category">Capacity</p>
-                        <CardTitle tag="p">150GB</CardTitle>
+                        <p className="card-category">Total Hours Watched</p>
+                        <CardTitle tag="p">{hrsWatch} </CardTitle>
                         <p />
                       </div>
                     </Col>
@@ -206,7 +233,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Line
-                    data={dashboardNASDAQChart.data}
+                    data={data}
                     options={dashboardNASDAQChart.options}
                     width={400}
                     height={100}
@@ -230,5 +257,6 @@ class Dashboard extends React.Component {
     );
   }
 }
+
 
 export default Dashboard;
