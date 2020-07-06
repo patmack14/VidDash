@@ -170,14 +170,14 @@ const data = [
     "sripName": "Off The Shelf vs Customized Knee Replacement",
     "Question": "Why do you choose customized knee replacements for your patients?",
     "owner": "58d1562960107c00060706a7",
-    "eventDate": "Mon Apr 23 2018 10:12:49 GMT-0500 (Central Daylight Time)",
+    "eventDate": "Wed Jul 01 2020 10:12:49 GMT-0500 (Central Daylight Time)",
     "type": "video_progress",
     "Event UUID": "58d1562960107c00060706a7",
     "Is Anonymous": 0,
     "Visitor": 0,
     "Unique Visitors": 0,
     "View": 0,
-    "hrsWatched": 0
+    "hrsWatched": .07
   },
   {
     "userName": "Scott Faucett, MD",
@@ -185,14 +185,14 @@ const data = [
     "sripName": "Off The Shelf vs Customized Knee Replacement",
     "Question": "Why do you choose customized knee replacements for your patients?",
     "owner": "58d1562960107c00060706a7",
-    "eventDate": "Mon Apr 23 2018 10:12:49 GMT-0500 (Central Daylight Time)",
+    "eventDate": "Tue Jun 30 2020 10:12:49 GMT-0500 (Central Daylight Time)",
     "type": "video_opened",
     "Event UUID": "58d1562960107c00060706a7",
     "Is Anonymous": 0,
     "Visitor": 0,
     "Unique Visitors": 0,
     "View": 1,
-    "hrsWatched": 0
+    "hrsWatched": .05
   },
   {
     "userName": "Scott Faucett, MD",

@@ -1011,7 +1011,7 @@ const data= [
       "Vidscrip Name": "Off The Shelf vs Customized Knee Replacement",
       "Question": "Why do you choose customized knee replacements for your patients?",
       "Event Owner": "5726cac7a254a5897c3c3195",
-      "Event Date": "Tue Nov 20 2018 15:38:59 GMT-0600 (Central Standard Time)",
+      "Event Date": "Tue Jun 30 2020 15:38:59 GMT-0600 (Central Standard Time)",
       "Event Type": "video_watched",
       "Event UUID": "24de-08e7-70a5-19f3",
       "Is Anonymous": 1,
