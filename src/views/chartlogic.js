@@ -44,12 +44,12 @@ export function last3(){
       var date1 = data[i].eventDate;
     var date2 = moment(date1);//Creates date object
     if(date2>=subtract90){//determines if current element is within the date range 
+      data[i].eventDate=moment(date2).format('YYYY-MM-DD');
       last90.push(data[i]);
-      console.log(last90)
+      
     }}
-   // for (let i = 0; i<last90.length;i++){
-     // last90[i].eventDate = moment().format("dd, MM Do YYYY, HH mm:ss ");
-    //}
+    last90.sort((a,b)=>moment(a.eventDate).unix()-moment(b.eventDate).unix()
+    );
     return last90;
     //console.log("Prior To Sorting ", last90);
     
@@ -94,13 +94,21 @@ return sortedDays;
 export function prevMonth() {
 const lastMonth = moment().subtract(1, 'month');
 const last30  = [];
-
+var j = 0;
 for(let i = 0; i<data.length;i++){
 var date1 = data[i].eventDate;
-    var date2 = moment(date1);
-    if(date2>=lastMonth)//determines if current element is within the date range 
-    last30.push(data[i]);
-}
+    var date2=moment(date1);
+    if(date2>=lastMonth&&data[i].hrsWatched>0){//determines if current element is within the date range 
+    
+    last30[j]=data[i];
+    
+    data[i].eventDate=moment(last30[j].eventDate).format('YYYY-MM-DD');
+  //  console.log('The reformatted date',last30[j].eventDate);
+   j++;
+}}
+console.log('the last 30 array', last30)
+last30.sort((a,b)=>moment(a.eventDate).unix()-moment(b.eventDate).unix()
+);
 return last30;
 }
 
