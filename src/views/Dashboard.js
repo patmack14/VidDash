@@ -19,10 +19,10 @@
 //import firstChart from "./chartlogic";
 
 import React from "react";
-
+import Select from 'react-select';
 
 // react plugin used to create charts
-import { Line, Pie } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 // reactstrap components
 import {
   Card,
@@ -40,12 +40,94 @@ import {
   lastMonth,
   last7Days
 } from "variables/charts.js";
+
 import data from './tester.js';
 var moment = require('moment');
 
-//console.log(data)
+const dropDown = [
+  { value: 'week', label: 'Past Week'},
+  { value: 'month', label: 'Last Month'},
+  {value:  'months3' , label: 'Last 3 Months'},
+  { value: 'months6', label: 'Last 6 months'},
+]
+const groupedOptions = [
+  {
+    label: 'Time Period',
+    options: dropDown,
+  },
+
+];
+
+function LineChart(props){
+  return ( 
+      <CardBody>
+    <Line
+      data={props.data}
+      options={props.options}
+      width={400}
+      height={100}
+    />
+  </CardBody>
+
+  )
+}
+
+let ChartHeader = (props) => {
+  if(props.value == 'week'){ return (
+    <CardHeader>
+      <CardTitle tag="h5">Hours Watched in last week </CardTitle>
+    </CardHeader>
+      )} else if(props.value == 'month') { 
+        return (
+    <CardHeader>
+      <CardTitle tag="h5">Views (Hours Watched in last month)</CardTitle>
+    </CardHeader>
+      ) } else if(props.value == 'months3') { 
+        return (
+      <CardHeader>
+        <CardTitle tag="h5">Hours Watched in last 3 months</CardTitle>
+      </CardHeader>
+      )
+    }  return (
+      <CardHeader>
+        <CardTitle tag="h5">Hours watched in last 6 months</CardTitle>
+      </CardHeader>
+      )
+    }
+    
+
+
+
+
+function ChartType(props){
+  if(props.value == 'week'){
+      return <LineChart data = {last7Days.data} options = {last7Days.options} />
+      }
+  else if (props.value == 'month'){
+      return <LineChart data = {lastMonth.data} options= {lastMonth.options} />
+  }
+  else if (props.value == 'months3'){
+      return <LineChart data = {dashboardLast90.data} options = {dashboardLast90.options} />
+  }
+  else if (props.value == 'months6'){
+      return <LineChart data = {dashboardLast180DaysChart.data} options = {dashboardLast180DaysChart.options} />
+  }
+  return<div></div>
+  
+}
 
 class Dashboard extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {chart: 'week'};
+}
+
+handleChange = (selectedOption) => { //this tells React what to do when a different chart is selected
+  this.setState({chart:selectedOption.value})
+}
+
+
+
   render() {
     
     let array= [];
@@ -101,136 +183,25 @@ if(data[i].hrsWatched>0)
                 </CardFooter>
               </Card>
             </Col>
-
             
-
-
-            <Col lg="3" md="6" sm="6">
-              <Card className="card-stats">
-                <CardBody>
-                  <Row>
-                    <Col md="4" xs="5">
-                      <div className="icon-big text-center icon-warning">
-                        <i className="nc-icon nc-vector text-danger" />
-                      </div>
-                    </Col>
-                    <Col md="8" xs="7">
-                      <div className="numbers">
-                        <p className="card-category">Errors</p>
-                        <CardTitle tag="p">23</CardTitle>
-                        <p />
-                      </div>
-                    </Col>
-                  </Row>
-                </CardBody>
-                <CardFooter>
-                  <hr />
-                  <div className="stats">
-                    <i className="far fa-clock" /> In the last hour
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
-         </Row>
-
+          </Row>
           <Row>
             <Col md="12">
               <Card>
-                <CardHeader>
-                  <CardTitle tag="h5">Views in:</CardTitle>
-                  <p className="card-category">Past 6 Months</p>
-                </CardHeader>
-                <CardBody>
-                  <Line
-                    data={dashboardLast180DaysChart.data}
-                    options={dashboardLast180DaysChart.options}
-                    width={400}
-                    height={100}
-                  />
-                </CardBody>
+              <ChartHeader value={this.state.chart} />
+                <ChartType value={this.state.chart} />
+                
                 <CardFooter>
                   <hr />
                   <div className="stats">
-                    <i className="fa fa-history" /> Updated 3 minutes ago
+                  <Select
+                    defaultValue={dropDown[0]}
+                    onChange={this.handleChange}
+                    options = {groupedOptions}
+                   />
                   </div>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md="12">
-              <Card className="card-chart">
-                <CardHeader>
-                  <CardTitle tag="h5">Last 90 Days</CardTitle>
-                  
-                </CardHeader>
-                <CardBody>
-                  <Line
-                    data={dashboardLast90.data}
-                    options={dashboardLast90.options}
-                    width={600}
-                    height={100}
-                  />
-                </CardBody>
-                <CardFooter>
-                
-                  <hr />
-                  <div className="card-stats">
-          
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-
-            <Row>
-            
-            <Col md="12">
-              <Card className="card-chart">
-                <CardHeader>
-                  <CardTitle tag="h5">Previous Month</CardTitle>
-                  <p className="card-category"></p>
-                </CardHeader>
-                <CardBody>
-                  <Line
-                    data={lastMonth.data}
-                    options={lastMonth.options}
-                    width={600}
-                    height={100}
-                  />
-                </CardBody>
-                <CardFooter>
-                  
-                  <hr />
-                  <div className="card-stats">
-                    <i className="fa fa-check" /> Data information certified
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md="12">
-              <Card className="card-chart">
-                <CardHeader>
-                  <CardTitle tag="h5">Last Week</CardTitle>
-                  
-                </CardHeader>
-                <CardBody>
-                  <Line
-                    data={last7Days.data}
-                    options={last7Days.options}
-                    width={600}
-                    height={100}
-                  />
-                </CardBody>
-                <CardFooter>
-                
-                  <hr />
-                  <div className="card-stats">
-          
+                  <div>
+                    <p className = "title">Click to select graph timeframe</p>
                   </div>
                 </CardFooter>
               </Card>
